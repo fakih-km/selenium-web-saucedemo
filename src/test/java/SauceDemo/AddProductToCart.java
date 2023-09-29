@@ -7,10 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
+import static org.testng.AssertJUnit.assertTrue;
+
 
 public class AddProductToCart {
 
@@ -92,12 +96,39 @@ public class AddProductToCart {
     @Test(priority = 2)
     private void AddToCart(){
 
-        //add to cart in the list porduct page
-        //add to cart in the PDP
+        //add to cart in the list product page
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        Assert.assertEquals(driver.findElement(By.className("shopping_cart_badge")).getText(),"1");// verify badge in the cart
+
         //remove product in the list product page
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+        assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty());// verify badge cart not exist
+
+        //add to cart in the PDP
+        driver.findElement(By.id("item_4_title_link")).click();// navigate to PDP
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        Assert.assertEquals(driver.findElement(By.className("shopping_cart_badge")).getText(),"1");// verify badge in the cart
+
         //remove product int the PDP
-        //remove product in the cart page
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+        assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty());// verify badge cart not exist
 
+        //verify product in the cart page
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.className("shopping_cart_link")).click();
+        Assert.assertEquals(driver.findElement(By.className("inventory_item_name")).getText(),"Sauce Labs Backpack");
+        Assert.assertEquals(driver.findElement(By.className("inventory_item_desc")).getText(),"carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.");
+        Assert.assertEquals(driver.findElement(By.className("inventory_item_price")).getText(),"$29.99");
+        Assert.assertEquals(driver.findElement(By.className("shopping_cart_badge")).getText(),"1");
 
+        // remove product in the cart
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+        assertTrue(driver.findElements(By.className("shopping_cart_badge")).isEmpty());
+        assertTrue(driver.findElements(By.className("inventory_item_name")).isEmpty());
+
+    }
+    @AfterTest
+    private void CloseBrowser(){
+        driver.close();
     }
 }

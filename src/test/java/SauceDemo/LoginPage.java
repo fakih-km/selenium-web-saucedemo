@@ -8,13 +8,15 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
+import org.openqa.selenium.chrome.ChromeOptions;
 import static org.testng.Assert.assertEquals;
 
 public class LoginPage {
     WebDriver driver;
+
     @BeforeTest
     private void init() {
+
         //initial browser
         System.setProperty("web-driver.chrome.driver", "C:/Program Files/Google/Chrome/Application/chrome.exe");
         driver = new ChromeDriver();
@@ -22,6 +24,7 @@ public class LoginPage {
         driver.manage().window().maximize();
         //get to homepage
         driver.navigate().to("https://www.saucedemo.com/");
+
 
     }
 
