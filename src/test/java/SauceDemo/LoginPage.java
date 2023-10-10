@@ -4,15 +4,30 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+
+
+import static java.lang.Thread.sleep;
 import static org.testng.Assert.assertEquals;
 
 public class LoginPage {
     WebDriver driver;
+
+    LoginPage(){
+
+    }
+
+    LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
 
     @BeforeTest
     private void init() {
@@ -45,7 +60,7 @@ public class LoginPage {
     }
 
     @Test (priority = 1)
-    private void LoginFailed(){
+    public void LoginFailed() throws InterruptedException {
         //click button login
         driver.findElement(By.id("login-button")).click();
         //check error message username null
@@ -63,13 +78,21 @@ public class LoginPage {
         driver.findElement(By.className("error-button")).click();
         //clear text input
         driver.findElement(By.id("user-name")).clear();
+        driver.findElement(By.id("password")).click();
+        driver.navigate().refresh();
+       // sleep(2000); // Wait for 2 seconds
+
+//        sleep(2000);
+//        driver.findElement(By.id("user-name")).click();
+//        sleep(2000);
 
     }
 
     @Test(priority = 2)
-    private void LoginSuccess(){
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("login-button")).click();
+    public void LoginSuccess(){
+        driver.findElement(By.name("user-name")).sendKeys("standard_user");
+        driver.findElement(By.name("password")).sendKeys("secret_sauce");
+        driver.findElement(By.name("login-button")).click();
         driver.findElement(By.className("shopping_cart_link"));
     }
 

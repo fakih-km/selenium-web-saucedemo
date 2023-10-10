@@ -31,17 +31,20 @@ public class AddProductToCart {
 
     }
 
-    @Test(priority = 0)
-    private void Login(){
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
-
-    }
+//    @Test(priority = 0)
+//    public void Login(){
+//        LoginPage loginPage = new LoginPage(driver);
+//        loginPage.LoginSuccess();
+////        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+////        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+////        driver.findElement(By.id("login-button")).click();
+//
+//    }
 
     @Test(priority = 1)
-    private void CheckElement(){
-
+    private void CheckElement()  {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.LoginSuccess();
         //check icon cart
         driver.findElement(By.className("shopping_cart_link"));
 
