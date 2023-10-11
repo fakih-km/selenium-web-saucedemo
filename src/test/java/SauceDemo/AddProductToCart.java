@@ -31,17 +31,7 @@ public class AddProductToCart {
 
     }
 
-//    @Test(priority = 0)
-//    public void Login(){
-//        LoginPage loginPage = new LoginPage(driver);
-//        loginPage.LoginSuccess();
-////        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-////        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-////        driver.findElement(By.id("login-button")).click();
-//
-//    }
-
-    @Test(priority = 1)
+    @Test(priority = 0)
     private void CheckElement()  {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.LoginSuccess();
@@ -96,7 +86,7 @@ public class AddProductToCart {
 
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1)
     private void AddToCart(){
 
         //add to cart in the list product page

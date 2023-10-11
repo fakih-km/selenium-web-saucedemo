@@ -77,14 +77,7 @@ public class LoginPage {
         assertEquals(driver.findElement(By.cssSelector("body h3")).getText(),"Epic sadface: Username and password do not match any user in this service");
         driver.findElement(By.className("error-button")).click();
         //clear text input
-        driver.findElement(By.id("user-name")).clear();
-        driver.findElement(By.id("password")).click();
         driver.navigate().refresh();
-       // sleep(2000); // Wait for 2 seconds
-
-//        sleep(2000);
-//        driver.findElement(By.id("user-name")).click();
-//        sleep(2000);
 
     }
 
